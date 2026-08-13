@@ -1,0 +1,15 @@
+<!-- Launch file to start the full system in a vehicle. -->
+<launch>
+	<arg name="logfile" />
+
+	<!-- start recorder -->
+	<set_parameter name="use_sim_time" value="true" />
+
+	<!-- launch core components that should always run -->
+	<node name="play" pkg="rosbag" exec="play" args="--clock --loop $(var logfile)" />
+
+	<!-- launch core components that should always run -->
+	<include file="$(find-pkg-share autominy)/launch/Core.launch">
+		<arg name="live"            value="false" />
+	</include>
+</launch>

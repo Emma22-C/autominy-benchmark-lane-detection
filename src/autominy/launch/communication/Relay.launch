@@ -1,0 +1,6 @@
+<launch>
+    <arg name="live"            description="Whether to instantiate a live system (true) or a bag-based one (false)" />
+    <arg name="car_id"         default="$(env ROS_CAR_ID 129)" />
+
+    <node pkg="topic_tools" exec="relay" name="relay_odom_$(var car_id)" args="/sensors/localization/filtered_map /communication/$(var car_id)/localization" />
+</launch>

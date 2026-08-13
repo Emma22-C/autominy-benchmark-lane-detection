@@ -1,0 +1,47 @@
+<!-- -->
+<launch>
+
+  <arg name="name"  default="model_car"/>
+  <arg name="model" default="car"/>
+  <arg name="world_name" default="empty"/>
+  <arg name="gazebo_gui" default="True"/>
+  <arg name="fake_localization" default="false" description="Whether to run the localization nodes or to use localization provided by the simulator." />
+  <arg name="car_x"    default="0.189021"/>
+  <arg name="car_y"    default="4.092613"/> <!--CW: -0.2, CCW: 0.2 -->
+  <arg name="car_yaw"  default="-1.5708"/> <!--CW: 0.0, CCW: 3.1416 -->
+
+  <!-- Spawn the World -->
+  <include file="$(find-pkg-share autominy_sim)/launch/world.launch">
+    <arg name="world_name" value="$(var world_name)"/>
+    <arg name="gui"   value="$(var gazebo_gui)"/>
+  </include>
+  
+  <include file="$(find-pkg-share world_description)/launch/spawn_world.launch">
+  </include>
+
+  <!-- [I-11 FIX] Publish /robot_description of the car BEFORE spawning it. -->
+  <!-- spawn_car.launch only consumes /robot_description; this include publishes it. -->
+  <include file="$(find-pkg-share car_description)/launch/description.launch">
+    <arg name="name"  value="$(var name)"/>
+    <arg name="model" value="$(var model)"/>
+  </include>
+
+  <!-- Spawn the Car -->
+  <include file="$(find-pkg-share car_description)/launch/spawn_car.launch">
+    <arg name="name"  value="$(var name)"/>
+    <arg name="model" value="$(var model)"/>
+    <arg name="x"     value="$(var car_x)"/>
+    <arg name="y"     value="$(var car_y)"/>
+    <arg name="yaw"   value="$(var car_yaw)"/>
+  </include>
+
+    <include file="$(find-pkg-share sim_car_controller)/launch/control.launch">
+      <arg name="name"  value="$(var name)"/>
+      <arg name="model" value="$(var model)"/>
+      <arg name="x"     value="$(var car_x)"/>
+      <arg name="y"     value="$(var car_y)"/>
+      <arg name="yaw"   value="$(var car_yaw)"/>
+    </include>
+
+
+</launch>

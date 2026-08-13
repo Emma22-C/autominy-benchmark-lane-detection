@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>car_description</name>
+  <version>0.0.0</version>
+  <description>URDF description of the autominy car.</description>
+
+  <!-- One maintainer tag required, multiple allowed, one person per tag --> 
+  <!-- Example:  -->
+  <maintainer email="hiyop@live.de">Marcel Schmidt</maintainer>
+  <maintainer email="buengese@gmail.com">buengese</maintainer>
+
+  <license>LGPL</license>
+  <author email="hiyop@live.de">Marcel Schmidt</author>
+  <author email="buengese@gmail.com">buengese</author>
+
+  <depend>robot_state_publisher</depend>
+  <depend>joint_state_publisher</depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_plugins</depend>
+  <depend>odometry</depend>
+
+  <!-- Use test_depend for packages you need only for testing: -->
+  <!--   <test_depend>gtest</test_depend> -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

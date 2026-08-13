@@ -1,0 +1,11 @@
+<launch>
+	<arg name="live"            description="Whether to instantiate a live system (true) or a bag-based one (false)" />
+
+    <node if="$(var live)"
+          pkg="low_voltage_shutdown"
+          name="low_voltage_shutdown"
+          exec="low_voltage_shutdown_node"
+    >
+    	<remap from="voltage" to="/sensors/arduino/voltage" />
+    </node>
+</launch>

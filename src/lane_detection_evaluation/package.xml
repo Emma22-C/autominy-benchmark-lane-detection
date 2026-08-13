@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>lane_detection_evaluation</name>
+  <version>0.1.0</version>
+  <description>
+    Evaluation node and post-processing scripts that compare
+    lane_detection_fcm against lane_detection_sliding_windows
+    using ground-truth pose from the AutoMiny simulator.
+    Produces CSV logs and LaTeX comparison tables.
+  </description>
+
+  <maintainer email="trejo_macotela@upp.edu.mx">UPP Robotics Group</maintainer>
+  <author>J. E. Vidal-Cuevas</author>
+  <author>F. R. Trejo-Macotela</author>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>message_filters</depend>
+
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pandas</exec_depend>
+  <exec_depend>python3-scipy</exec_depend>
+  <exec_depend>python3-matplotlib</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

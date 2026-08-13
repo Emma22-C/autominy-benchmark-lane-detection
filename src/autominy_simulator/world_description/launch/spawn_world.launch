@@ -1,0 +1,6 @@
+<!-- -->
+<launch>
+  <include file="$(find-pkg-share world_description)/launch/spawn_robotics_lab.launch">
+  </include>
+
+</launch>  

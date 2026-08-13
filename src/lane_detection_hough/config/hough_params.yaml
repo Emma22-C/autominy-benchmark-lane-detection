@@ -1,0 +1,54 @@
+# lane_detection_hough/config/hough_params.yaml
+#
+# Parámetros del algoritmo Hough probabilístico para detección de carril
+# sobre la imagen IPM 320x240. Los valores son razonables para el Berlin
+# Virtual Lab; ajustar si la pista cambia de iluminación o trazado.
+#
+# CRÍTICO: la sección 'preprocessing' DEBE ser idéntica a la de
+# lane_detection_fcm/config/fcm_params.yaml y a la de
+# lane_detection_sliding_windows/config/sw_params.yaml para que la
+# comparación sea metodológicamente justa.
+
+/lane_detection_hough:
+  ros__parameters:
+    input_image_topic: "/sensors/camera/color/image_rect_color"
+    publish_debug_image: true
+    camera_center_offset: -12
+
+    hough:
+      # Resolución del acumulador (rho en px, theta en rad).
+      rho_resolution: 1.0
+      theta_resolution: 0.017453293  # pi/180 = 1 grado
+      # Mínimo número de votos para considerar una línea (sensible al
+      # tamaño de la imagen; para 320x240 valores entre 20-40 funcionan bien).
+      votes_threshold: 25
+      # Longitud mínima de segmento en píxeles.
+      min_line_length: 20.0
+      # Gap máximo permitido entre puntos del mismo segmento.
+      max_line_gap: 10.0
+      # Filtro de pendiente: descartar segmentos casi-horizontales.
+      # |dy/dx| >= min_abs_slope -> aceptar.
+      min_abs_slope: 0.5
+      # Mínimo número de endpoints para hacer regresión.
+      min_endpoints_for_regression: 4
+
+    preprocessing:
+      resize_factor: 0.5
+      ipm_src_flat: [63.0, 110.0, 257.0, 110.0, 0.0, 185.0, 320.0, 185.0]
+      ipm_dst_flat: [63.0, 0.0, 257.0, 0.0, 63.0, 240.0, 257.0, 240.0]
+      gray_threshold_low: 200
+      gray_threshold_high: 255
+      median_blur_kernel: 5
+      canny_low: 300
+      canny_high: 700
+      canny_aperture: 3
+      apply_white_filter: true
+      white_filter_max_width: 20
+      roi_left_x: 0
+      roi_left_y: 0
+      roi_left_width: 160
+      roi_left_height: 240
+      roi_right_x: 160
+      roi_right_y: 0
+      roi_right_width: 160
+      roi_right_height: 240

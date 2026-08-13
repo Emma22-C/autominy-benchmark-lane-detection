@@ -1,0 +1,41 @@
+# lane_detection_sliding_windows/config/sw_params.yaml
+#
+# Parámetros del algoritmo de Sliding Windows tomados del paper original
+# (lane_detectionslide.cpp): n_windows=9, margin=20, minpix=40, min_pts_reg=75.
+#
+# CRÍTICO: la sección 'preprocessing' DEBE ser idéntica a la de
+# lane_detection_fcm/config/fcm_params.yaml para que la comparación
+# sea metodológicamente justa.
+
+/lane_detection_sliding_windows:
+  ros__parameters:
+    input_image_topic: "/sensors/camera/color/image_rect_color"
+    publish_debug_image: true
+    camera_center_offset: -12
+
+    sliding_windows:
+      n_windows: 9
+      margin: 20
+      min_pixels_per_window: 40
+      min_points_for_regression: 75
+
+    preprocessing:
+      resize_factor: 0.5
+      ipm_src_flat: [63.0, 110.0, 257.0, 110.0, 0.0, 185.0, 320.0, 185.0]
+      ipm_dst_flat: [63.0, 0.0, 257.0, 0.0, 63.0, 240.0, 257.0, 240.0]
+      gray_threshold_low: 200
+      gray_threshold_high: 255
+      median_blur_kernel: 5
+      canny_low: 300
+      canny_high: 700
+      canny_aperture: 3
+      apply_white_filter: true
+      white_filter_max_width: 20
+      roi_left_x: 0
+      roi_left_y: 0
+      roi_left_width: 160
+      roi_left_height: 240
+      roi_right_x: 160
+      roi_right_y: 0
+      roi_right_width: 160
+      roi_right_height: 240

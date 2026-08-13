@@ -1,0 +1,31 @@
+# lane_detection_evaluation/config/evaluation_params.yaml
+#
+# Parámetros para el nodo metrics_collector_node.
+#
+# El mismo binario se lanza dos veces (una por algoritmo) con etiquetas
+# diferentes y CSV de salida diferentes. Ver los launch files en la
+# carpeta launch/.
+
+/metrics_collector:
+  ros__parameters:
+    # Etiqueta del algoritmo que se está midiendo (se escribe en cada fila).
+    # Sobrescribir desde el launch file: "fcm" o "sliding_windows".
+    algo_label: "fcm"
+
+    # Path absoluto del CSV de salida. Sobrescribir desde launch.
+    output_csv_path: "/tmp/lane_detection_fcm.csv"
+
+    # Namespace del nodo de detección al que suscribirse.
+    # Ejemplos válidos:
+    #   /lane_detection_fcm
+    #   /lane_detection_sliding_windows
+    detection_namespace: "/lane_detection_fcm"
+
+    # Topic de odometría ground truth del simulador AutoMiny.
+    # En el simulador AutoMiny v4.0 portado a ROS2 Humble este topic es:
+    #   /simulation/odom_ground_truth   (nav_msgs/Odometry)
+    odom_topic: "/simulation/odom_ground_truth"
+
+    # Si true, se suscribe a xie_beni_* y fpc_* (solo aplica para FCM).
+    # Si el algoritmo no publica esos topics, simplemente se queda en NaN.
+    log_fuzzy_metrics: true

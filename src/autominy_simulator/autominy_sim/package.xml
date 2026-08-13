@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>autominy_sim</name>
+  <version>0.0.0</version>
+  <description>Autominy simulator core package.</description>
+
+  <maintainer email="hiyop@live.de">Marcel Schmidt</maintainer>
+  <maintainer email="buengese@gmail.com">buengese</maintainer>
+
+  <license>LGPL</license>
+
+  <author email="hiyop@live.de">Marcel Schmidt</author>
+  <author email="buengese@gmail.com">buengese</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>gazebo_ros</depend>
+  <depend>joint_state_publisher</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

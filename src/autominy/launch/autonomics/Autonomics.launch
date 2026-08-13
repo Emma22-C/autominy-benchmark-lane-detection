@@ -1,0 +1,14 @@
+<launch>
+	<arg name="live"            description="Whether to instantiate a live system (true) or a bag-based one (false)" />
+	<arg name="agent_prefix"    default="" />
+
+	<include file="$(find-pkg-share autominy)/launch/autonomics/EmergencyStop.launch">
+		<arg name="live"    		value="$(var live)" />
+		<arg name="agent_prefix"    value="$(var agent_prefix)" />
+	</include>
+
+	<include file="$(find-pkg-share autominy)/launch/autonomics/LowVoltageShutdown.launch">
+		<arg name="live"    		value="$(var live)" />
+	</include>
+
+</launch>

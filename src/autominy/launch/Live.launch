@@ -1,0 +1,10 @@
+<!-- Launch file to start the full system in a vehicle. -->
+<launch>
+	<!-- start recorder -->
+	<set_parameter name="use_sim_time" value="false" />
+
+	<!-- launch core components that should always run -->
+	<include file="$(find-pkg-share autominy)/launch/Core.launch">
+		<arg name="live"            value="true" />
+	</include>
+</launch>

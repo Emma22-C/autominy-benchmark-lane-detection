@@ -1,0 +1,14 @@
+<!-- Launch file to start the full system in a vehicle. -->
+<launch>
+	<set_parameter name="use_sim_time" value="true" />
+
+	<!-- launch core components that should always run -->
+	<include file="$(find-pkg-share autominy)/launch/Core.launch">
+		<arg name="live"            value="false" />
+	</include>
+
+	<!-- launch simulation -->
+	<include file="$(find-pkg-share autominy_sim)/launch/Simulation.launch.py">
+	</include>
+
+</launch>

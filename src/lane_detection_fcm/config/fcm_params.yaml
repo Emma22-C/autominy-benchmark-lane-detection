@@ -1,0 +1,52 @@
+# lane_detection_fcm/config/fcm_params.yaml
+#
+# Parámetros del algoritmo FCM idénticos a los reportados en la
+# Tabla II del paper original (Vidal-Cuevas et al.):
+#   m=2, epsilon=0.005, clusters=3, dimensions=2.
+# El código actual usa 4 clusters por ROI (consistente con
+# lane_detectionfuzzy.cpp).
+#
+# Incluye también la sección 'preprocessing' (idéntica a la
+# de lane_common/config/preprocessing.yaml) para que el nodo
+# se pueda lanzar standalone si se desea.
+
+/lane_detection_fcm:
+  ros__parameters:
+    input_image_topic: "/sensors/camera/color/image_rect_color"
+    publish_debug_image: true
+    warm_start_seeding: false
+    camera_center_offset: -17
+
+    fcm:
+      n_clusters: 4
+      m: 2.0
+      epsilon: 0.005
+      max_iterations: 50
+      # Seeding inicial: ROI L con X fijo en ~80, ROI R con X fijo en ~240
+      seed_left_x: [80.0, 80.0, 80.0, 80.0]
+      seed_left_y: [48.0, 96.0, 144.0, 192.0]
+      seed_right_x: [240.0, 240.0, 240.0, 240.0]
+      seed_right_y: [48.0, 96.0, 144.0, 192.0]
+
+    preprocessing:
+      resize_factor: 0.5
+      # IPM ajustado para la pista TMR (base inferior en y=185, no y=200,
+      # para excluir el marcador AR del vehículo de la proyección).
+      ipm_src_flat: [63.0, 110.0, 257.0, 110.0, 0.0, 185.0, 320.0, 185.0]
+      ipm_dst_flat: [63.0, 0.0, 257.0, 0.0, 63.0, 240.0, 257.0, 240.0]
+      gray_threshold_low: 200
+      gray_threshold_high: 255
+      median_blur_kernel: 5
+      canny_low: 300
+      canny_high: 700
+      canny_aperture: 3
+      apply_white_filter: true
+      white_filter_max_width: 20
+      roi_left_x: 0
+      roi_left_y: 0
+      roi_left_width: 160
+      roi_left_height: 240
+      roi_right_x: 160
+      roi_right_y: 0
+      roi_right_width: 160
+      roi_right_height: 240

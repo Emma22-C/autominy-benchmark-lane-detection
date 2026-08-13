@@ -1,0 +1,7 @@
+<launch>
+    <arg name="live"        description="Whether to connect to hardware (true) or just run the parsing nodes (false)" />
+
+    <include file="$(find-pkg-share autominy)/launch/visualization/JSK.launch">
+        <arg name="live"    		value="$(var live)" />
+    </include>
+</launch>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>lane_detection_cnn</name>
+  <version>0.1.0</version>
+  <description>
+    Cuarto detector de carril del benchmark: segmentación con U-Net (PyTorch)
+    sobre la imagen IPM, publicando el mismo contrato de topics que
+    lane_detection_fcm / lane_detection_sliding_windows / lane_detection_hough.
+  </description>
+  <maintainer email="jvidal@upp.edu.mx">Jesus Emmanuel Vidal-Cuevas</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>cv_bridge</exec_depend>
+  <exec_depend>python3-opencv</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <!-- torch NO se declara aqui: no existe como paquete rosdep estandar.
+       Debe estar disponible en el interprete de Python que use ROS2 al
+       correr este nodo -- ver README.md, seccion "Entorno Python". -->
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

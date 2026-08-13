@@ -1,0 +1,38 @@
+<!-- -->
+<launch>
+  <arg name="name"         default="model_car"/>
+  <arg name="agent_prefix" default=""/>
+  <arg name="tf_prefix" default=""/>
+
+  <!-- load the controllers -->
+    <!--<node name="controller_spawner"
+        pkg="controller_manager"
+        exec="spawner"
+        respawn="false"
+        output="screen"
+        ns="$(var agent_prefix)/$(var name)"
+        args="joint_state_controller car_cont -namespace=$(var agent_prefix)/$(var name)">
+       <param name="type" value="effort_controllers/AutominySimController" />
+       <param name="robot_description_param" value="$(var agent_prefix)/robot_description" />
+       <param name="drive_rear_left_joint" value="$(var tf_prefix)rearwheel_left" />
+       <param name="drive_rear_right_joint" value="$(var tf_prefix)rearwheel_right" />
+       <param name="drive_front_left_joint" value="$(var tf_prefix)frontwheel_left" />
+       <param name="drive_front_right_joint" value="$(var tf_prefix)frontwheel_right" />
+       <param name="steer_left_joint" value="$(var tf_prefix)frontwheel_steering_left" />
+       <param name="steer_right_joint" value="$(var tf_prefix)frontwheel_steering_right" />
+       <param name="axel_distance" value="0.26" />
+       <param name="wheel_distance" value="0.165" />
+       <param name="wheel_diameter" value="0.063" />
+       <param name="zero_steer_angle" value="0.0" />
+       <param name="steering_topic" value="$(var agent_prefix)/actuators/steering_pwm" />
+       <param name="steering_fb_topic" value="$(var agent_prefix)/sensors/arduino/steering_angle" />
+       <param name="speed_topic" value="$(var agent_prefix)/actuators/speed_pwm" />
+       <param name="ticks_topic" value="$(var agent_prefix)/sensors/arduino/ticks" />
+       <param name="voltage_topic" value="$(var agent_prefix)/sensors/arduino/voltage" />
+    </node>-->
+
+    <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster"></node>
+    <node pkg="controller_manager" exec="spawner" args="sim_car_controller"></node>
+
+</launch>
+

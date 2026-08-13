@@ -1,0 +1,37 @@
+# Parametros de lane_detection_cnn.
+#
+# IMPORTANTE: los valores de preprocessing.* y camera_center_offset deben
+# ser IDENTICOS a los que usan lane_detection_fcm / _sliding_windows / _hough
+# para que la comparacion sea justa (Metodologia B). Los valores puestos aqui
+# son los "calibrados" segun el historial del proyecto -- verifica contra tu
+# YAML real de lane_detection_fcm antes de correr el benchmark, porque los
+# defaults hardcodeados en LaneDetectionFcmNode.cpp (56/250/... offset=7) NO
+# coinciden con estos y probablemente ese YAML es el que los sobreescribe.
+
+lane_detection_cnn:
+  ros__parameters:
+    input_image_topic: "/sensors/camera/color/image_rect_color"
+    publish_debug_image: true
+    camera_center_offset: -12
+
+    preprocessing:
+      resize_factor: 0.5
+      ipm_out_width: 320
+      ipm_out_height: 240
+      ipm_src_flat: [63.0, 110.0, 257.0, 110.0, 0.0, 185.0, 320.0, 185.0]
+      ipm_dst_flat: [63.0, 0.0, 257.0, 0.0, 63.0, 240.0, 257.0, 240.0]
+      roi_left_x: 0
+      roi_left_y: 0
+      roi_left_width: 160
+      roi_left_height: 240
+      roi_right_x: 160
+      roi_right_y: 0
+      roi_right_width: 160
+      roi_right_height: 240
+
+    cnn:
+      model_path: "models/unet_best.pt"   # resuelto contra share/lane_detection_cnn/ si es relativo
+      base_channels: 16
+      threshold: 0.5
+      n_bands: 4          # igual a fcm.n_clusters, para comparabilidad
+      device: "auto"       # auto | cpu | cuda

@@ -1,0 +1,14 @@
+<!-- -->
+<launch>
+    <arg name="gui"   default="true"/>
+    <arg name="headless"	default="false"/>
+
+    <include file="$(find-pkg-share gazebo_ros)/launch/gzserver.launch.py">
+        <arg name="world" value="$(find-pkg-share autominy_sim)/worlds/empty.world" />
+    </include>
+
+    <include file="$(find-pkg-share gazebo_ros)/launch/gzclient.launch.py" if="$(var gui)">
+        <arg name="gui" value="$(var gui)" />
+    </include>
+</launch>
+

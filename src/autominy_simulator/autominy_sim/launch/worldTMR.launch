@@ -1,0 +1,18 @@
+<!-- worldTMR.launch — ROS2 Humble adaptation -->
+<!-- Lanza Gazebo Classic con un mundo TMR como argumento. -->
+<!-- Adaptación del worldTMR.launch original (ROS1 Noetic) que usaba empty_world.launch. -->
+<!-- En ROS2 usamos gzserver.launch.py + gzclient.launch.py separados. -->
+<launch>
+    <arg name="world_name" default="TMR2022_World3" description="Nombre del archivo .world (sin extensión) dentro de autominy_sim/worlds/"/>
+    <arg name="gui"        default="true"/>
+
+    <!-- Lanzar gzserver con el mundo TMR -->
+    <include file="$(find-pkg-share gazebo_ros)/launch/gzserver.launch.py">
+        <arg name="world" value="$(find-pkg-share autominy_sim)/worlds/$(var world_name).world"/>
+    </include>
+
+    <!-- Lanzar gzclient (GUI) si gui=true -->
+    <include file="$(find-pkg-share gazebo_ros)/launch/gzclient.launch.py" if="$(var gui)">
+        <arg name="gui" value="$(var gui)"/>
+    </include>
+</launch>

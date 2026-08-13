@@ -1,0 +1,68 @@
+# lane_common/config/preprocessing.yaml
+#
+# Configuración del preprocesado COMPARTIDA entre lane_detection_fcm
+# y lane_detection_sliding_windows. NO modificar para una sola corrida:
+# ambos algoritmos deben usar exactamente estos valores para que la
+# comparación de la Sección V del paper sea justa.
+#
+# Parámetros derivados de Vidal-Cuevas et al. (AutoMiny v4.0).
+
+/**:
+  ros__parameters:
+    preprocessing:
+      # Resize: 640x480 -> 320x240
+      resize_factor: 0.5
+
+      # IPM (Inverse Perspective Mapping) - 4 puntos fuente y destino
+      # en coordenadas de la imagen redimensionada (320x240).
+      # Formato plano [x0,y0,x1,y1,x2,y2,x3,y3] porque ROS2 no soporta
+      # vector<vector<double>> directamente como parámetro.
+      # Orden de los puntos: top-left, top-right, bottom-left, bottom-right.
+      #
+      # Calibración para la pista TMR (simulador AutoMiny v4.0):
+      #   - Trapecio FUENTE simétrico respecto a x=160:
+      #       top-left=63, top-right=257  -> centro arriba = 160
+      #       bot-left=0,  bot-right=320  -> centro abajo  = 160
+      #   - Rectángulo DESTINO simétrico respecto a x=160 también:
+      #       top-left=63, top-right=257 (no usar 56/250 del paper
+      #       original; eso sesgaba la proyección 7 px a la izquierda)
+      #   - Base inferior en y=185: deja visible el borde superior del
+      #     vehículo como referencia visual SIN incluir el marcador AR.
+      #
+      # Para que las líneas del carril aparezcan paralelas en la IPM:
+      # ambos polígonos deben ser simétricos respecto al mismo eje
+      # vertical, y este eje debe coincidir con el centro óptico de
+      # la cámara.
+      ipm_src_flat: [63.0, 110.0, 257.0, 110.0, 0.0, 185.0, 320.0, 185.0]
+      ipm_dst_flat: [63.0, 0.0, 257.0, 0.0, 63.0, 240.0, 257.0, 240.0]
+
+      # Threshold sobre escala de grises
+      gray_threshold_low: 200
+      gray_threshold_high: 255
+      median_blur_kernel: 5
+
+      # Canny
+      canny_low: 300
+      canny_high: 700
+      canny_aperture: 3
+
+      # White Filter (post-Canny): elimina rachas horizontales blancas
+      # más anchas que white_filter_max_width píxeles. Diseñado para
+      # remover cruces de paso de cebra y otras manchas anchas que no
+      # son rayas de carril. ACTIVO POR DEFECTO en la pista del TMR
+      # (contiene cruces); puede desactivarse poniendo apply_white_filter
+      # en false para pistas más simples como el Berlin Virtual Lab.
+      apply_white_filter: true
+      white_filter_max_width: 20
+
+      # ROI izquierdo (en imagen IPM 320x240)
+      roi_left_x: 0
+      roi_left_y: 0
+      roi_left_width: 160
+      roi_left_height: 240
+
+      # ROI derecho
+      roi_right_x: 160
+      roi_right_y: 0
+      roi_right_width: 160
+      roi_right_height: 240

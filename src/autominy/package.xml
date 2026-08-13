@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>autominy</name>
+  <version>0.0.1</version>
+  <description>Startup project</description>
+
+  <maintainer email="s.sundermann@fu-berlin.de">Stephan Sundermann</maintainer>
+
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <!-- Commonly used license strings: -->
+  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
+  <license>proprietary</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rplidar_ros</depend>
+  <depend>robot_localization</depend>
+  <depend>xacro</depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
