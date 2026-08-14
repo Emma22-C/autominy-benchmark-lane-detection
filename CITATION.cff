@@ -7,8 +7,6 @@ authors:
     given-names: "Jesús Emmanuel"
     orcid: "https://orcid.org/0000-0001-5881-6676"
     affiliation: "Universidad Politécnica de Pachuca"
-  - family-names: "Trejo-Macotela"
-    given-names: "F. R."
 repository-code: "https://github.com/Emma22-C/autominy-benchmark-lane-detection"
 url: "https://github.com/Emma22-C/autominy-benchmark-lane-detection"
 license: Apache-2.0
